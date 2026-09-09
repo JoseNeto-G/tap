@@ -315,18 +315,6 @@
   }, { threshold: 0.5 });
   slides.forEach(function(s){ io.observe(s); });
 
-  document.addEventListener('keydown', function(e){
-    var idx = 0, best = Infinity;
-    slides.forEach(function(s, i){
-      var d = Math.abs(s.getBoundingClientRect().top);
-      if(d < best){ best = d; idx = i; }
-    });
-    if(e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' '){
-      e.preventDefault(); if(slides[idx+1]) slides[idx+1].scrollIntoView();
-    } else if(e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp'){
-      e.preventDefault(); if(slides[idx-1]) slides[idx-1].scrollIntoView();
-    }
-  });
 </script>
 
 </body>
