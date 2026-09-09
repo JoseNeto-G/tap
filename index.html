@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tap — Software sob medida</title>
+<meta name="description" content="Tap desenvolve sites, sistemas de agendamento e aplicações sob medida para negócios que querem vender mais.">
+<style>
+  :root{
+    color-scheme: light;
+    --paper:#FFFFFF;
+    --surface:#F6F1ED;
+    --ink:#2B2724;
+    --muted:#6B625C;
+    --line:#E4DCD5;
+    --accent:#3FA9A0;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 28px}
+
+  header{padding:44px 0 0}
+  .logo{
+    font-size:30px;letter-spacing:-.03em;font-weight:600;
+    display:inline-flex;align-items:baseline;gap:3px;
+  }
+  .logo .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block}
+
+  .hero{padding:96px 0 84px;border-bottom:1px solid var(--line)}
+  h1{
+    font-size:clamp(34px,5.4vw,58px);
+    line-height:1.08;letter-spacing:-.035em;font-weight:600;
+    margin:0 0 26px;max-width:16ch;
+  }
+  h1 em{font-style:normal;color:var(--muted)}
+  .lede{font-size:19px;color:var(--muted);max-width:56ch;margin:0}
+
+  section{padding:76px 0}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:0 0 32px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:14px}
+  .card{
+    display:block;padding:26px 24px 24px;
+    background:var(--surface);border:1px solid transparent;border-radius:14px;
+    text-decoration:none;color:inherit;
+    transition:transform .22s ease,border-color .22s ease,background .22s ease;
+  }
+  .card:hover{transform:translateY(-3px);border-color:var(--line);background:#fff}
+  .card .k{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .card .t{font-size:19px;letter-spacing:-.02em;margin:8px 0 6px;font-weight:600}
+  .card .d{font-size:14px;color:var(--muted);line-height:1.5}
+
+  .cap{margin:26px 0 0;font-size:14px;color:var(--muted);max-width:60ch}
+
+  .what{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:38px}
+  .what h3{font-size:17px;letter-spacing:-.015em;margin:0 0 8px;font-weight:600}
+  .what p{margin:0;font-size:15px;color:var(--muted)}
+
+  footer{border-top:1px solid var(--line);padding:38px 0 60px;font-size:14px;color:var(--muted)}
+  footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+  footer a:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="logo">tap<span class="dot"></span></div>
+  </header>
+
+  <div class="hero">
+    <h1>Software que faz o cliente chegar até você.</h1>
+    <p class="lede">Sites, agendamento online e sistemas sob medida para negócios locais que já têm reputação — e perdem venda porque não têm onde receber o cliente fora do horário comercial.</p>
+  </div>
+
+  <section>
+    <h2>Demonstrações por segmento</h2>
+    <div class="grid">
+      <a class="card" href="beleza/">
+        <div class="k">01</div>
+        <div class="t">Beleza &amp; Estética</div>
+        <div class="d">Agenda por serviço e profissional, com confirmação no WhatsApp.</div>
+      </a>
+      <a class="card" href="odonto/">
+        <div class="k">02</div>
+        <div class="t">Odontologia</div>
+        <div class="d">Captação de avaliação e triagem do paciente antes da consulta.</div>
+      </a>
+      <a class="card" href="advocacia/">
+        <div class="k">03</div>
+        <div class="t">Advocacia</div>
+        <div class="d">Triagem do caso em três passos, qualificando antes do atendimento.</div>
+      </a>
+      <a class="card" href="alimentacao/">
+        <div class="k">04</div>
+        <div class="t">Alimentação</div>
+        <div class="d">Cardápio com pedido direto no WhatsApp, sem comissão de plataforma.</div>
+      </a>
+      <a class="card" href="fitness/">
+        <div class="k">05</div>
+        <div class="t">Fitness &amp; Pilates</div>
+        <div class="d">Planos e captação de aula experimental, virando mensalidade.</div>
+      </a>
+    </div>
+    <p class="cap">Cada demonstração é entregue com o nome, as fotos, os serviços e os horários do seu negócio.</p>
+  </section>
+
+  <section class="what" style="border-top:1px solid var(--line)">
+    <div>
+      <h3>Sob medida, não template fechado</h3>
+      <p>O sistema é construído em cima de como o seu negócio já funciona, não o contrário.</p>
+    </div>
+    <div>
+      <h3>Entrega em dias, não meses</h3>
+      <p>Base pronta e testada, personalizada para você. O site entra no ar rápido e começa a trabalhar.</p>
+    </div>
+    <div>
+      <h3>Feito para converter</h3>
+      <p>Cada página existe para transformar visita em agendamento, pedido ou contato qualificado.</p>
+    </div>
+  </section>
+
+  <footer>
+    Tap — desenvolvimento de software · <a href="https://wa.me/5511970336126">Falar no WhatsApp</a>
+  </footer>
+</div>
+
+</body>
+</html>
