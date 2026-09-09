@@ -294,6 +294,8 @@
 
   function pad(n){ return n < 10 ? '0' + n : '' + n; }
 
+  window.addEventListener('scroll', function(){ if(window.scrollY > 40) hint.style.opacity = '0'; }, {passive:true});
+
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(e.isIntersecting){
