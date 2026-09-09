@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Fraternidade × Tap — O plano</title>
+<title>Fraternidade × Tap — Diagnóstico e plano</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -18,296 +18,301 @@
     --accent:#A87B4A;
     --accent-soft:#E7D7C0;
     --line:#E9E2D9;
+    --pos:#3F7D5A;
+    --neg:#B0563C;
     --font:'Jost',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
-  body{
-    background:var(--ink);color:var(--ink);
-    font-family:var(--font);font-weight:300;line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
+  html{scroll-snap-type:y mandatory;scroll-behavior:smooth;}
+  body{background:var(--ink);color:var(--ink);font-family:var(--font);font-weight:300;line-height:1.55;-webkit-font-smoothing:antialiased;}
   p{margin:0;} a{color:inherit;}
 
-  .deck{}
-  .slide{
-    min-height:100vh;scroll-snap-align:start;
-    display:flex;align-items:center;position:relative;
-    padding:clamp(38px,4.6vw,66px) 0;background:var(--paper);
-  }
-  .wrap{max-width:1000px;margin:0 auto;padding:0 clamp(26px,5vw,54px);width:100%;}
-
+  .slide{min-height:100vh;scroll-snap-align:start;display:flex;align-items:center;position:relative;padding:clamp(38px,4.4vw,64px) 0;background:var(--paper);}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 clamp(26px,5vw,54px);width:100%;}
   .slide.dark{background:var(--ink);color:#fff;}
-  .slide.dark .lead{color:rgba(255,255,255,.62);}
+  .slide.dark .lead{color:rgba(255,255,255,.64);}
   .slide.dark .kicker{color:var(--accent-soft);}
   .slide.sand{background:var(--surface);}
 
-  .kicker{font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:500;}
-  h1{font-weight:200;font-size:clamp(2.1rem,5.6vw,3.7rem);line-height:1.03;letter-spacing:-.04em;margin:20px 0 0;text-wrap:balance;}
-  h2{font-weight:200;font-size:clamp(1.75rem,4.2vw,2.75rem);line-height:1.1;letter-spacing:-.03em;margin:18px 0 0;text-wrap:balance;max-width:20ch;}
-  .lead{margin-top:16px;font-size:clamp(.98rem,1.5vw,1.12rem);color:var(--muted);max-width:52ch;}
+  .kicker{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:500;}
+  h1{font-weight:200;font-size:clamp(2rem,5.2vw,3.5rem);line-height:1.05;letter-spacing:-.04em;margin:18px 0 0;text-wrap:balance;}
+  h2{font-weight:200;font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.12;letter-spacing:-.03em;margin:14px 0 0;text-wrap:balance;max-width:22ch;}
+  .lead{margin-top:14px;font-size:clamp(.96rem,1.4vw,1.08rem);color:var(--muted);max-width:56ch;}
   .lead b{font-weight:400;color:inherit;}
   .slide.dark .lead b{color:#fff;}
 
-  .big{font-weight:200;font-size:clamp(3.2rem,11vw,7rem);letter-spacing:-.05em;line-height:.95;color:var(--accent);}
+  .diag{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media (max-width:760px){.diag{grid-template-columns:1fr;}}
+  .dcol{border:1px solid var(--line);border-radius:16px;padding:20px 22px;}
+  .slide.dark .dcol{border-color:rgba(255,255,255,.16);}
+  .dcol h4{margin:0;font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;}
+  .dcol.has h4{color:var(--pos);}
+  .dcol.miss h4{color:var(--neg);}
+  .dcol ul{margin:12px 0 0;padding:0;list-style:none;}
+  .dcol li{font-size:.95rem;padding:6px 0 6px 20px;position:relative;color:var(--muted);}
+  .slide.dark .dcol li{color:rgba(255,255,255,.68);}
+  .dcol li::before{content:'';position:absolute;left:0;top:14px;width:7px;height:7px;border-radius:50%;}
+  .dcol.has li::before{background:var(--pos);}
+  .dcol.miss li::before{background:var(--neg);}
 
-  /* passo */
-  .step-head{display:flex;align-items:baseline;gap:18px;}
-  .step-num{font-weight:200;font-size:clamp(2.2rem,5.4vw,3.5rem);letter-spacing:-.05em;color:var(--accent-soft);line-height:1;flex:none;}
-  .slide.dark .step-num{color:rgba(255,255,255,.22);}
-  .cols{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-  @media (max-width:760px){.cols{grid-template-columns:1fr;gap:18px;}}
-  .box{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:var(--paper);}
-  .slide.dark .box{border-color:rgba(255,255,255,.16);background:transparent;}
-  .slide.sand .box{background:var(--paper);}
-  .box .t{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);font-weight:500;}
-  .box p{margin-top:10px;font-size:.99rem;color:var(--muted);}
-  .slide.dark .box p{color:rgba(255,255,255,.66);}
+  .stats{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  @media (max-width:800px){.stats{grid-template-columns:1fr;gap:10px;}}
+  .stat{border:1px solid var(--line);border-radius:16px;padding:22px 20px;background:var(--paper);}
+  .slide.dark .stat{border-color:rgba(255,255,255,.16);background:transparent;}
+  .slide.sand .stat{background:var(--paper);}
+  .stat .n{font-weight:200;font-size:clamp(1.7rem,3.6vw,2.5rem);letter-spacing:-.04em;line-height:1.05;color:var(--accent);}
+  .slide.dark .stat .n{color:var(--accent-soft);}
+  .stat .d{margin-top:10px;font-size:.92rem;color:var(--muted);}
+  .slide.dark .stat .d{color:rgba(255,255,255,.66);}
+  .stat .src{margin-top:9px;font-size:.68rem;letter-spacing:.04em;color:var(--muted);opacity:.72;}
+  .slide.dark .stat .src{color:rgba(255,255,255,.42);}
 
-  /* conta */
-  .calc{margin-top:26px;display:flex;align-items:stretch;gap:14px;flex-wrap:wrap;}
-  .cell{border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:16px 20px;min-width:150px;flex:1;}
-  .cell .lbl{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-soft);}
-  .cell .val{font-weight:200;font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-.03em;margin-top:8px;color:#fff;}
-  .cell .val small{font-size:.9rem;color:rgba(255,255,255,.5);letter-spacing:0;}
-  .op{display:flex;align-items:center;font-size:1.6rem;color:rgba(255,255,255,.35);font-weight:200;}
-  @media (max-width:760px){.op{display:none;} .cell{min-width:100%;}}
+  .lever-head{display:flex;align-items:baseline;gap:16px;}
+  .lever-n{font-weight:200;font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-.05em;color:var(--accent-soft);line-height:1;flex:none;}
+  .slide.dark .lever-n{color:rgba(255,255,255,.24);}
 
-  /* timeline */
-  .phases{margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
-  @media (max-width:760px){.phases{grid-template-columns:1fr;}}
+  .math{margin-top:24px;border:1px solid rgba(255,255,255,.18);border-radius:18px;overflow:hidden;}
+  .mrow{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:13px 22px;border-bottom:1px solid rgba(255,255,255,.1);font-size:.98rem;}
+  .mrow:last-child{border-bottom:none;}
+  .mrow .k{color:rgba(255,255,255,.66);}
+  .mrow .v{color:#fff;font-size:1.06rem;}
+  .mrow.tot{background:rgba(168,123,74,.18);}
+  .mrow.tot .k{color:#fff;}
+  .mrow.tot .v{color:var(--accent-soft);font-size:1.4rem;font-weight:200;}
+  .assum{margin-top:14px;font-size:.76rem;color:rgba(255,255,255,.45);max-width:64ch;line-height:1.7;}
+
+  .deliv{margin-top:26px;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+  @media (max-width:760px){.deliv{grid-template-columns:1fr;}}
+  .dv{background:var(--paper);padding:20px 22px;}
+  .dv .t{font-size:1rem;}
+  .dv p{margin-top:6px;font-size:.9rem;color:var(--muted);}
+
+  .phases{margin-top:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+  @media (max-width:820px){.phases{grid-template-columns:1fr 1fr;}}
+  @media (max-width:520px){.phases{grid-template-columns:1fr;}}
   .phase{background:var(--paper);padding:20px 18px;}
-  .phase .w{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:500;}
-  .phase .h{font-size:1.12rem;margin-top:10px;}
-  .phase p{margin-top:8px;font-size:.92rem;color:var(--muted);}
+  .phase .w{font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:500;}
+  .phase .h{font-size:1.04rem;margin-top:8px;}
+  .phase p{margin-top:6px;font-size:.88rem;color:var(--muted);}
 
-  .quote{margin-top:24px;border-left:2px solid var(--accent);padding-left:22px;font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:200;line-height:1.45;max-width:30ch;}
+  .srcs{margin-top:22px;font-size:.78rem;max-width:74ch;line-height:1.8;}
 
-  .cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;}
-  .btn{padding:15px 28px;border-radius:100px;font-size:.93rem;text-decoration:none;display:inline-block;transition:transform .2s;}
+  .cta{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{padding:14px 26px;border-radius:100px;font-size:.92rem;text-decoration:none;display:inline-block;transition:transform .2s;}
   .btn:hover{transform:translateY(-2px);}
   .btn-a{background:var(--accent);color:#fff;}
   .btn-b{border:1px solid rgba(255,255,255,.32);color:#fff;}
 
-  .counter{position:fixed;right:22px;bottom:20px;z-index:20;font-size:.72rem;letter-spacing:.18em;color:rgba(255,255,255,.55);background:rgba(35,33,32,.72);backdrop-filter:blur(8px);padding:8px 14px;border-radius:100px;pointer-events:none;}
-  .brandtag{position:fixed;left:22px;bottom:20px;z-index:20;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);background:rgba(35,33,32,.72);backdrop-filter:blur(8px);padding:8px 14px;border-radius:100px;pointer-events:none;}
-  .hint{position:fixed;left:50%;transform:translateX(-50%);bottom:20px;z-index:20;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45);transition:opacity .5s ease;pointer-events:none;}
-  @media (max-width:700px){.hint{display:none;}}
+  .counter{position:fixed;right:20px;bottom:18px;z-index:20;font-size:.7rem;letter-spacing:.18em;color:rgba(255,255,255,.55);background:rgba(35,33,32,.72);backdrop-filter:blur(8px);padding:7px 13px;border-radius:100px;pointer-events:none;}
+  .brandtag{position:fixed;left:20px;bottom:18px;z-index:20;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);background:rgba(35,33,32,.72);backdrop-filter:blur(8px);padding:7px 13px;border-radius:100px;pointer-events:none;}
 
-  .rv{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;}
+  .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
   .rv.in{opacity:1;transform:none;}
-  @media (prefers-reduced-motion:reduce){
-    *{transition-duration:.001ms!important;animation-duration:.001ms!important;}
-    html{scroll-behavior:auto;} .rv{opacity:1;transform:none;}
-  }
+  @media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important;} html{scroll-behavior:auto;} .rv{opacity:1;transform:none;}}
 </style>
 </head>
 <body>
 
-<div class="deck" id="deck">
+<section class="slide dark">
+  <div class="wrap rv">
+    <div class="kicker">Diagnóstico e plano de crescimento</div>
+    <h1>Como a Fraternidade fatura mais<br>com o movimento que já tem.</h1>
+    <p class="lead">Três alavancas, os números de mercado que sustentam cada uma, e o que precisa ser construído para elas funcionarem.</p>
+    <p class="lead" style="margin-top:22px;font-size:.82rem;opacity:.6">Tap · desenvolvimento de software · setembro de 2026</p>
+  </div>
+</section>
 
-  <!-- 1 -->
-  <section class="slide dark">
-    <div class="wrap rv">
-      <div class="kicker">Fraternidade Barber Shop &amp; Pub × Tap</div>
-      <h1>Você já tem a melhor nota do bairro.<br>Falta o cliente conseguir chegar.</h1>
-      <p class="lead">Um plano de cinco passos para transformar a reputação que vocês já construíram em faturamento.</p>
-    </div>
-  </section>
-
-  <!-- 2 -->
-  <section class="slide">
-    <div class="wrap rv">
-      <div class="kicker">Primeiro, uma história</div>
-      <h2>São 21h de uma quinta em Guarulhos.</h2>
-      <p class="lead">O Rafael passa a mão na barba, olha no espelho e decide: <b>amanhã eu corto</b>. Ele mora a oito minutos de vocês. Nunca ouviu falar da Fraternidade.</p>
-    </div>
-  </section>
-
-  <!-- 3 -->
-  <section class="slide sand">
-    <div class="wrap rv">
-      <div class="kicker">Ele procura</div>
-      <h2>E vocês aparecem na frente.</h2>
-      <p class="lead">Ele digita “barbearia perto de mim”. A Fraternidade sobe na lista com <b>4,8 de 93 avaliações</b> — a melhor nota da tela. Esse é o ativo que vocês levaram anos construindo, e ele está funcionando.</p>
-      <div class="quote">Até aqui, vocês ganharam.</div>
-    </div>
-  </section>
-
-  <!-- 4 -->
-  <section class="slide dark">
-    <div class="wrap rv">
-      <div class="kicker">Aí ele clica</div>
-      <h2>E a porta está fechada.</h2>
-      <p class="lead">Sem site. Sem preço. Sem cardápio. Um Instagram e um telefone. São 21h — ninguém vai atender, e ninguém responde DM a essa hora.</p>
-      <p class="lead" style="margin-top:16px">O Rafael não vai esperar até amanhã para descobrir quanto custa um corte.</p>
-    </div>
-  </section>
-
-  <!-- 5 -->
-  <section class="slide">
-    <div class="wrap rv">
-      <div class="kicker">O que acontece depois</div>
-      <h2>Ele volta para a lista e marca com o segundo colocado.</h2>
-      <p class="lead">Que tem <b>nota pior que a de vocês</b> — mas tem botão de agendar. Em quarenta segundos está resolvido.</p>
-      <p class="lead" style="margin-top:16px">O Rafael nunca soube que aqui tem chopp gelado e hambúrguer na chapa. Nunca soube que dá para ficar depois do corte. <b>Ele nunca soube que vocês existem de verdade.</b></p>
-    </div>
-  </section>
-
-  <!-- 6 -->
-  <section class="slide dark">
-    <div class="wrap rv">
-      <div class="kicker">A conta que ninguém faz</div>
-      <h2>Quantos Rafaels por dia?</h2>
-      <p class="lead">Não é uma pergunta retórica — é a conta que define o tamanho do problema. Vamos preencher juntos na call:</p>
-      <div class="calc">
-        <div class="cell"><div class="lbl">Rafaels por dia</div><div class="val">?</div></div>
-        <div class="op">×</div>
-        <div class="cell"><div class="lbl">Ticket médio</div><div class="val">R$ ?</div></div>
-        <div class="op">×</div>
-        <div class="cell"><div class="lbl">Dias no mês</div><div class="val">26</div></div>
-        <div class="op">=</div>
-        <div class="cell" style="border-color:var(--accent)"><div class="lbl">Receita que passa reto</div><div class="val">R$ ?<small> /mês</small></div></div>
+<section class="slide">
+  <div class="wrap rv">
+    <div class="kicker">Ponto de partida</div>
+    <h2>O ativo está pronto. A estrutura para explorar ele, não.</h2>
+    <div class="diag">
+      <div class="dcol has">
+        <h4>O que vocês já têm</h4>
+        <ul>
+          <li>Nota 4,8 com 93 avaliações no Google</li>
+          <li>Duas linhas de receita: barbearia e pub</li>
+          <li>Operação até 22h, quando o concorrente já fechou</li>
+          <li>Barbeiros citados pelo nome nas avaliações</li>
+        </ul>
       </div>
-      <p class="lead" style="margin-top:26px">Se o número for pequeno, a gente não faz nada. Se for grande, os próximos cinco slides resolvem.</p>
-    </div>
-  </section>
-
-  <!-- 7 -->
-  <section class="slide sand">
-    <div class="wrap rv">
-      <div class="kicker">O plano</div>
-      <h2>Cinco passos para o Rafael chegar até a cadeira.</h2>
-      <p class="lead">Nenhum deles depende de vocês gastarem com anúncio. Todos usam o que a casa já tem: reputação, dois barbeiros bons e uma cozinha que ninguém conhece.</p>
-    </div>
-  </section>
-
-  <!-- 8 · passo 1 -->
-  <section class="slide">
-    <div class="wrap rv">
-      <div class="step-head"><div class="step-num">01</div><div><div class="kicker">A vitrine</div><h2 style="margin-top:8px">Fazer o Google trabalhar até o fim.</h2></div></div>
-      <p class="lead">Hoje o perfil traz o Rafael até a porta e para ali. Ele passa a ter destino: preço, cardápio, fotos do espaço, horário do pub separado do horário da barbearia — e um botão que resolve.</p>
-      <div class="cols">
-        <div class="box"><div class="t">O que muda</div><p>O perfil deixa de ser um cartão de visita e vira o primeiro passo de uma venda que termina em agendamento.</p></div>
-        <div class="box"><div class="t">Como se mede</div><p>Cliques em “Como chegar” e “Site” no painel do Google, mês a mês. O número está lá, hoje, e ninguém olha.</p></div>
+      <div class="dcol miss">
+        <h4>O que falta</h4>
+        <ul>
+          <li>Site: quem pesquisa não tem para onde ir</li>
+          <li>Agenda online: só dá para marcar no horário comercial</li>
+          <li>Confirmação automática: falta vira cadeira vazia</li>
+          <li>Recorrência: todo mês recomeça do zero</li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 9 · passo 2 -->
-  <section class="slide dark">
-    <div class="wrap rv">
-      <div class="step-head"><div class="step-num">02</div><div><div class="kicker">A porta</div><h2 style="margin-top:8px">Uma agenda que não fecha às 22h.</h2></div></div>
-      <p class="lead">O cliente decide cortar quando ele quer, não quando vocês estão abertos. Agendamento online recebe o Rafael das 21h, das 2h da manhã, do domingo. Com lembrete automático antes do horário — <b>cadeira vazia por esquecimento é prejuízo puro</b>.</p>
-      <div class="cols">
-        <div class="box"><div class="t">O que muda</div><p>Vocês param de trocar dez mensagens para marcar um corte, e param de perder quem chegou fora do expediente.</p></div>
-        <div class="box"><div class="t">Como se mede</div><p>Quantos agendamentos entram fora do horário comercial, e quanto cai o índice de quem não aparece.</p></div>
+<section class="slide dark">
+  <div class="wrap rv">
+    <div class="kicker">Onde o dinheiro escapa hoje</div>
+    <h2>Três vazamentos, todos mensuráveis.</h2>
+    <div class="stats">
+      <div class="stat">
+        <div class="n">76%</div>
+        <div class="d">de quem faz uma busca local no celular visita um estabelecimento em até 24h. Hoje essa busca chega em vocês e para.</div>
+        <div class="src">Dados de busca local · mercado BR</div>
+      </div>
+      <div class="stat">
+        <div class="n">15–25%</div>
+        <div class="d">da agenda vira falta em casas sem confirmação automática. Cadeira reservada e vazia é prejuízo integral.</div>
+        <div class="src">Relatos do setor de beleza BR</div>
+      </div>
+      <div class="stat">
+        <div class="n">45 dias</div>
+        <div class="d">é o intervalo médio de retorno do cliente avulso. O assinante volta a cada 14.</div>
+        <div class="src">Plataformas de gestão de barbearia</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 10 · passo 3 -->
-  <section class="slide">
-    <div class="wrap rv">
-      <div class="step-head"><div class="step-num">03</div><div><div class="kicker">O ticket</div><h2 style="margin-top:8px">O pub deixa de depender da cadeira.</h2></div></div>
-      <p class="lead">Hoje só descobre o pub quem já entrou para cortar. Ele é a segunda linha de receita da casa e vive escondido atrás da primeira. Cardápio visível, combo corte + chopp, e a oferta indo junto na confirmação do agendamento.</p>
-      <div class="cols">
-        <div class="box"><div class="t">O que muda</div><p>O mesmo cliente gasta mais na mesma visita. É a receita mais barata que existe: não custa nada para atrair.</p></div>
-        <div class="box"><div class="t">Como se mede</div><p>Ticket médio por cliente e a fatia dos que consomem no pub depois do corte.</p></div>
-      </div>
+<section class="slide sand">
+  <div class="wrap rv">
+    <div class="kicker">O plano</div>
+    <h2>Três alavancas, nesta ordem.</h2>
+    <p class="lead">A ordem importa: não adianta atrair mais gente antes de parar de perder a que já chega, e nenhuma das duas se paga sem fazer o mesmo cliente valer mais.</p>
+    <div class="stats" style="margin-top:26px">
+      <div class="stat"><div class="n">01</div><div class="d"><b style="color:var(--ink);font-weight:400">Ser achado — e ter para onde mandar.</b><br>Google otimizado, site com preço e cardápio, verba de anúncio no bairro.</div></div>
+      <div class="stat"><div class="n">02</div><div class="d"><b style="color:var(--ink);font-weight:400">Parar de perder quem já quer vir.</b><br>Agenda aberta 24h com confirmação automática.</div></div>
+      <div class="stat"><div class="n">03</div><div class="d"><b style="color:var(--ink);font-weight:400">Fazer o mesmo cliente valer mais.</b><br>Clube de assinatura e o pub entrando na conta.</div></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 11 · passo 4 -->
-  <section class="slide sand">
-    <div class="wrap rv">
-      <div class="step-head"><div class="step-num">04</div><div><div class="kicker">A recorrência</div><h2 style="margin-top:8px">Transformar corte avulso em mensalidade.</h2></div></div>
-      <p class="lead">Barbearia vive de retorno — o mesmo cliente, a cada quinze dias, o ano inteiro. Um clube mensal (dois cortes e uma barba, valor fechado) troca receita imprevisível por receita que entra todo dia 5.</p>
-      <div class="cols">
-        <div class="box"><div class="t">O que muda</div><p>Vocês passam a saber quanto vão faturar antes do mês começar, e o cliente deixa de comparar preço a cada corte.</p></div>
-        <div class="box"><div class="t">Como se mede</div><p>Número de assinantes ativos e a frequência média de retorno de quem assina contra quem não assina.</p></div>
-      </div>
+<section class="slide">
+  <div class="wrap rv">
+    <div class="lever-head"><div class="lever-n">01</div><div><div class="kicker">Aquisição</div><h2 style="margin-top:6px">Ser achado — e ter para onde mandar.</h2></div></div>
+    <p class="lead">Perto de metade das buscas no Google tem intenção local, e quem procura “barbearia perto de mim” decide na hora. Perfil completo, site com preço e cardápio, e uma verba pequena de anúncio no raio do bairro.</p>
+    <div class="stats">
+      <div class="stat"><div class="n">46%</div><div class="d">das buscas no Google têm intenção local.</div><div class="src">Mercado de busca local</div></div>
+      <div class="stat"><div class="n">7×</div><div class="d">mais cliques em perfis completos e ativos do que em perfis incompletos.</div><div class="src">Google Meu Negócio</div></div>
+      <div class="stat"><div class="n">R$ 0,80–3,00</div><div class="d">é o custo por clique de serviços locais em Meta Ads no Brasil.</div><div class="src">Benchmarks Meta Ads BR · 2026</div></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 12 · passo 5 -->
-  <section class="slide dark">
-    <div class="wrap rv">
-      <div class="step-head"><div class="step-num">05</div><div><div class="kicker">O motor</div><h2 style="margin-top:8px">Avaliação vira combustível, não sorte.</h2></div></div>
-      <p class="lead">As 93 avaliações vieram de quem lembrou de avaliar sozinho. Pedir no automático, com link direto, logo depois do atendimento, multiplica isso — e <b>quanto mais avaliação, mais alto vocês aparecem para o próximo Rafael</b>. O passo 5 alimenta o passo 1.</p>
-      <div class="cols">
-        <div class="box"><div class="t">O que muda</div><p>O crescimento deixa de depender de sorte e vira um ciclo: mais avaliação, mais posição, mais cliente novo.</p></div>
-        <div class="box"><div class="t">Como se mede</div><p>Avaliações novas por mês e a posição da casa na busca por “barbearia” na região.</p></div>
-      </div>
+<section class="slide dark">
+  <div class="wrap rv">
+    <div class="kicker">Alavanca 01 · a conta</div>
+    <h2>O que R$ 600 por mês de anúncio compram.</h2>
+    <div class="math">
+      <div class="mrow"><span class="k">Verba mensal em anúncio local</span><span class="v">R$ 600</span></div>
+      <div class="mrow"><span class="k">A R$ 1,50 por clique</span><span class="v">400 cliques no mês</span></div>
+      <div class="mrow"><span class="k">Viram agendamento a 5%</span><span class="v">20 clientes novos</span></div>
+      <div class="mrow"><span class="k">Ticket estimado (corte + barba)</span><span class="v">R$ 75</span></div>
+      <div class="mrow tot"><span class="k">Receita no primeiro mês</span><span class="v">R$ 1.500</span></div>
     </div>
-  </section>
+    <p class="assum">Premissas a validar com os números reais da casa: custo por clique dentro da faixa de mercado para serviço local, conversão conservadora de 5% e ticket estimado. A conta considera só a primeira visita — não inclui retorno nem consumo no pub.</p>
+  </div>
+</section>
 
-  <!-- 13 -->
-  <section class="slide">
-    <div class="wrap rv">
-      <div class="kicker">A mesma quinta-feira, 21h</div>
-      <h2>Só que agora o Rafael termina a noite marcado.</h2>
-      <p class="lead">Ele digita “barbearia perto de mim”. Vocês aparecem com 4,8. Ele clica, vê o preço do combo, escolhe o Vini, pega sábado às 15h e recebe a confirmação no WhatsApp — <b>tudo isso enquanto vocês estão fechados</b>.</p>
-      <p class="lead" style="margin-top:16px">No sábado ele corta, e como já viu o cardápio antes de chegar, fica para o chopp. Duas semanas depois, vira assinante. E deixa a 94ª avaliação.</p>
-      <div class="quote">Mesma casa. Mesmos barbeiros. Mesma nota.<br>Outro faturamento.</div>
+<section class="slide">
+  <div class="wrap rv">
+    <div class="lever-head"><div class="lever-n">02</div><div><div class="kicker">Retenção da agenda</div><h2 style="margin-top:6px">Parar de perder quem já quer vir.</h2></div></div>
+    <p class="lead">Esse é o dinheiro mais barato da lista: o cliente já decidiu, já marcou, e some. Agenda aberta 24h captura quem decide fora do expediente, e a confirmação automática traz de volta quem esqueceu.</p>
+    <div class="stats">
+      <div class="stat"><div class="n">até 40%</div><div class="d">de redução nas faltas em casas que adotam confirmação automática e política de cancelamento clara.</div><div class="src">Relatos do setor de beleza BR</div></div>
+      <div class="stat"><div class="n">20–25%</div><div class="d">da agenda perdida é o padrão de quem não confirma nada com o cliente.</div><div class="src">Relatos do setor de beleza BR</div></div>
+      <div class="stat"><div class="n">R$ 0</div><div class="d">de custo de aquisição: esse cliente já é seu, só não chegou até a cadeira.</div><div class="src">&nbsp;</div></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 14 -->
-  <section class="slide sand">
-    <div class="wrap rv">
-      <div class="kicker">Como começa</div>
-      <h2>Rápido, e na ordem que dá dinheiro primeiro.</h2>
-      <div class="phases">
-        <div class="phase"><div class="w">Semana 1</div><div class="h">Site no ar</div><p>Passos 1 e 2. Vitrine completa e agenda funcionando. É o que para o vazamento imediatamente.</p></div>
-        <div class="phase"><div class="w">Semana 2</div><div class="h">Pub e ticket</div><p>Passo 3. Cardápio publicado, combo montado e oferta entrando na confirmação.</p></div>
-        <div class="phase"><div class="w">Mês 2</div><div class="h">Recorrência</div><p>Passos 4 e 5. Clube mensal e o pedido automático de avaliação rodando.</p></div>
-      </div>
-      <p class="lead" style="margin-top:30px">A prévia do site já está pronta, com os dados públicos de vocês. Dá para ver funcionando agora.</p>
+<section class="slide sand">
+  <div class="wrap rv">
+    <div class="lever-head"><div class="lever-n">03</div><div><div class="kicker">Valor por cliente</div><h2 style="margin-top:6px">Fazer o mesmo cliente valer mais.</h2></div></div>
+    <p class="lead">O assinante entra com o corte já pago, então consome mais barba, sobrancelha e pigmentação — e é justamente ele que fica para o chopp. É aqui que a barbearia e o pub deixam de ser dois negócios e viram um.</p>
+    <div class="stats">
+      <div class="stat"><div class="n">R$ 360 → R$ 900</div><div class="d">é o gasto anual do avulso comparado ao do assinante. Cerca de 2,5× mais.</div><div class="src">Plataformas de gestão de barbearia</div></div>
+      <div class="stat"><div class="n">14 dias</div><div class="d">é a frequência de retorno do assinante, contra 45 dias do cliente avulso.</div><div class="src">Plataformas de gestão de barbearia</div></div>
+      <div class="stat"><div class="n">74%</div><div class="d">dos brasileiros já assinam algum serviço recorrente. O hábito de pagar todo mês existe.</div><div class="src">Mercado de assinaturas BR</div></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 15 -->
-  <section class="slide dark">
-    <div class="wrap rv">
-      <div class="kicker">Tap · desenvolvimento de software</div>
-      <h1 style="font-size:clamp(2rem,5.4vw,3.4rem)">Vamos preencher aquela conta juntos?</h1>
-      <p class="lead">Se o número não justificar, a gente para por aqui. Se justificar, começamos pela semana 1.</p>
-      <div class="cta">
-        <a class="btn btn-a" href="../barbearia/" target="_blank" rel="noopener">Ver a prévia do site</a>
-        <a class="btn btn-b" href="https://wa.me/5511970336126" target="_blank" rel="noopener">Falar com a Tap</a>
-      </div>
+<section class="slide dark">
+  <div class="wrap rv">
+    <div class="kicker">As três somadas</div>
+    <h2>O efeito não é somar. É multiplicar.</h2>
+    <div class="math">
+      <div class="mrow"><span class="k">01 · clientes novos vindos de anúncio</span><span class="v">+ R$ 1.500 /mês</span></div>
+      <div class="mrow"><span class="k">02 · faltas recuperadas</span><span class="v">a calcular com a agenda real</span></div>
+      <div class="mrow"><span class="k">03 · 30 assinantes a R$ 89</span><span class="v">+ R$ 2.670 /mês recorrente</span></div>
+      <div class="mrow"><span class="k">Consumo no pub de quem fica</span><span class="v">a calcular com o ticket real</span></div>
+      <div class="mrow tot"><span class="k">Base que passa a entrar todo mês</span><span class="v">R$ 4.170 +</span></div>
     </div>
-  </section>
+    <p class="assum">Cenário para dar ordem de grandeza, não promessa de resultado. As duas linhas em aberto dependem de dados que só vocês têm: quantas faltas acontecem por semana e quanto o cliente consome no pub. É o que levantamos na primeira reunião.</p>
+  </div>
+</section>
 
-</div>
+<section class="slide">
+  <div class="wrap rv">
+    <div class="kicker">O papel da Tap</div>
+    <h2>Nada disso funciona sem a estrutura por baixo.</h2>
+    <p class="lead">As três alavancas dependem de um lugar para onde mandar o cliente, uma agenda que trabalhe sozinha e uma cobrança que se repita todo mês. É isso que construímos.</p>
+    <div class="deliv">
+      <div class="dv"><div class="t">Site com preço, cardápio e o pub</div><p>O destino do anúncio e da busca no Google. Sem ele, a alavanca 01 não existe.</p></div>
+      <div class="dv"><div class="t">Agenda online por barbeiro, 24h</div><p>Com confirmação e lembrete automáticos. É a alavanca 02 inteira.</p></div>
+      <div class="dv"><div class="t">Clube de assinatura com cobrança recorrente</div><p>Plano, adesão e cobrança mensal rodando sozinhos. É a alavanca 03.</p></div>
+      <div class="dv"><div class="t">Painel de números</div><p>Agendamentos, faltas, assinantes e de onde veio cada cliente. Sem medir não dá para melhorar.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide sand">
+  <div class="wrap rv">
+    <div class="kicker">Como conduzimos</div>
+    <h2>Consultoria primeiro, entrega depois.</h2>
+    <div class="phases">
+      <div class="phase"><div class="w">Reunião 1</div><div class="h">Diagnóstico</div><p>Levantamos faltas por semana, ticket real, consumo no pub e ociosidade das cadeiras.</p></div>
+      <div class="phase"><div class="w">Reunião 2</div><div class="h">Plano fechado</div><p>Metas, verba de anúncio, preço do clube e o retorno esperado de cada alavanca.</p></div>
+      <div class="phase"><div class="w">Semanas 1–3</div><div class="h">Construção</div><p>Site, agenda, assinatura e painel no ar, com a equipe treinada para operar.</p></div>
+      <div class="phase"><div class="w">Mês 2 em diante</div><div class="h">Acompanhamento</div><p>Leitura dos números e ajuste de campanha e do clube.</p></div>
+    </div>
+    <p class="lead" style="margin-top:22px">A prévia do site já está pronta com os dados públicos de vocês — dá para ver funcionando agora.</p>
+  </div>
+</section>
+
+<section class="slide dark">
+  <div class="wrap rv">
+    <div class="kicker">Próximo passo</div>
+    <h1 style="font-size:clamp(1.8rem,4.4vw,2.9rem)">Faltam quatro números<br>para fechar a conta.</h1>
+    <p class="lead">Quantas faltas por semana, ticket médio real, consumo médio no pub e quantas cadeiras ficam ociosas de segunda a quinta. Com isso o plano deixa de ser cenário e vira meta.</p>
+    <div class="cta">
+      <a class="btn btn-a" href="../barbearia/" target="_blank" rel="noopener">Ver a prévia do site</a>
+      <a class="btn btn-b" href="https://wa.me/5511970336126" target="_blank" rel="noopener">Falar com a Tap</a>
+    </div>
+    <p class="srcs" style="color:rgba(255,255,255,.42)">
+      <b style="color:rgba(255,255,255,.72);font-weight:400">De onde vêm os números:</b> dados de busca local e de Google Meu Negócio compilados por consultorias de SEO no Brasil; faixas de custo por clique de Meta Ads no Brasil em 2026; índices de falta e de assinatura divulgados por plataformas de gestão de salões e barbearias. São referências de mercado, para dar ordem de grandeza — os números da Fraternidade entram no lugar delas na primeira reunião.
+    </p>
+  </div>
+</section>
 
 <div class="brandtag">Tap</div>
-<div class="counter" id="counter">01 / 15</div>
-<div class="hint" id="hint">Role para avançar</div>
+<div class="counter" id="counter">01 / 12</div>
 
 <script>
-  var deck = document.getElementById('deck');
   var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
   var counter = document.getElementById('counter');
-  var hint = document.getElementById('hint');
-
   function pad(n){ return n < 10 ? '0' + n : '' + n; }
-
-  window.addEventListener('scroll', function(){ if(window.scrollY > 40) hint.style.opacity = '0'; }, {passive:true});
 
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(e.isIntersecting){
         e.target.querySelectorAll('.rv').forEach(function(el){ el.classList.add('in'); });
         var i = slides.indexOf(e.target);
-        if(i >= 0){
-          counter.textContent = pad(i+1) + ' / ' + pad(slides.length);
-          if(i > 0) hint.style.opacity = '0';
-        }
+        if(i >= 0) counter.textContent = pad(i+1) + ' / ' + pad(slides.length);
       }
     });
-  }, { threshold: 0.55 });
+  }, { threshold: 0.5 });
   slides.forEach(function(s){ io.observe(s); });
 
   document.addEventListener('keydown', function(e){
@@ -317,11 +322,9 @@
       if(d < best){ best = d; idx = i; }
     });
     if(e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' '){
-      e.preventDefault();
-      if(slides[idx+1]) slides[idx+1].scrollIntoView();
+      e.preventDefault(); if(slides[idx+1]) slides[idx+1].scrollIntoView();
     } else if(e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp'){
-      e.preventDefault();
-      if(slides[idx-1]) slides[idx-1].scrollIntoView();
+      e.preventDefault(); if(slides[idx-1]) slides[idx-1].scrollIntoView();
     }
   });
 </script>
