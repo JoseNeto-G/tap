@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Fraternidade × Tap — O plano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme:light;
+    --paper:#FFFFFF;
+    --surface:#F2EDE6;
+    --ink:#232120;
+    --muted:#7C746E;
+    --accent:#A87B4A;
+    --accent-soft:#E7D7C0;
+    --line:#E9E2D9;
+    --font:'Jost',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--ink);color:var(--ink);
+    font-family:var(--font);font-weight:300;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  p{margin:0;} a{color:inherit;}
+
+  .deck{height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
+  .slide{
+    min-height:100vh;scroll-snap-align:start;scroll-snap-stop:always;
+    display:flex;align-items:center;position:relative;
+    padding:clamp(56px,7vw,90px) 0;background:var(--paper);
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding:0 clamp(26px,5vw,54px);width:100%;}
+
+  .slide.dark{background:var(--ink);color:#fff;}
+  .slide.dark .lead{color:rgba(255,255,255,.62);}
+  .slide.dark .kicker{color:var(--accent-soft);}
+  .slide.sand{background:var(--surface);}
+
+  .kicker{font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:500;}
+  h1{font-weight:200;font-size:clamp(2.4rem,6.6vw,4.4rem);line-height:1.03;letter-spacing:-.04em;margin:20px 0 0;text-wrap:balance;}
+  h2{font-weight:200;font-size:clamp(1.9rem,4.8vw,3.2rem);line-height:1.1;letter-spacing:-.03em;margin:18px 0 0;text-wrap:balance;max-width:20ch;}
+  .lead{margin-top:22px;font-size:clamp(1.02rem,1.7vw,1.22rem);color:var(--muted);max-width:52ch;}
+  .lead b{font-weight:400;color:inherit;}
+  .slide.dark .lead b{color:#fff;}
+
+  .big{font-weight:200;font-size:clamp(3.2rem,11vw,7rem);letter-spacing:-.05em;line-height:.95;color:var(--accent);}
+
+  /* passo */
+  .step-head{display:flex;align-items:baseline;gap:18px;}
+  .step-num{font-weight:200;font-size:clamp(2.6rem,7vw,4.6rem);letter-spacing:-.05em;color:var(--accent-soft);line-height:1;flex:none;}
+  .slide.dark .step-num{color:rgba(255,255,255,.22);}
+  .cols{margin-top:38px;display:grid;grid-template-columns:1fr 1fr;gap:26px;}
+  @media (max-width:760px){.cols{grid-template-columns:1fr;gap:18px;}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:24px 22px;background:var(--paper);}
+  .slide.dark .box{border-color:rgba(255,255,255,.16);background:transparent;}
+  .slide.sand .box{background:var(--paper);}
+  .box .t{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);font-weight:500;}
+  .box p{margin-top:10px;font-size:.99rem;color:var(--muted);}
+  .slide.dark .box p{color:rgba(255,255,255,.66);}
+
+  /* conta */
+  .calc{margin-top:40px;display:flex;align-items:stretch;gap:14px;flex-wrap:wrap;}
+  .cell{border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:20px 24px;min-width:150px;flex:1;}
+  .cell .lbl{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-soft);}
+  .cell .val{font-weight:200;font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-.03em;margin-top:8px;color:#fff;}
+  .cell .val small{font-size:.9rem;color:rgba(255,255,255,.5);letter-spacing:0;}
+  .op{display:flex;align-items:center;font-size:1.6rem;color:rgba(255,255,255,.35);font-weight:200;}
+  @media (max-width:760px){.op{display:none;} .cell{min-width:100%;}}
+
+  /* timeline */
+  .phases{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+  @media (max-width:760px){.phases{grid-template-columns:1fr;}}
+  .phase{background:var(--paper);padding:26px 22px;}
+  .phase .w{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:500;}
+  .phase .h{font-size:1.12rem;margin-top:10px;}
+  .phase p{margin-top:8px;font-size:.92rem;color:var(--muted);}
+
+  .quote{margin-top:34px;border-left:2px solid var(--accent);padding-left:22px;font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:200;line-height:1.45;max-width:30ch;}
+
+  .cta{margin-top:38px;display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{padding:15px 28px;border-radius:100px;font-size:.93rem;text-decoration:none;display:inline-block;transition:transform .2s;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-a{background:var(--accent);color:#fff;}
+  .btn-b{border:1px solid rgba(255,255,255,.32);color:#fff;}
+
+  .counter{position:fixed;right:22px;bottom:20px;z-index:20;font-size:.72rem;letter-spacing:.18em;color:rgba(255,255,255,.55);background:rgba(35,33,32,.72);backdrop-filter:blur(8px);padding:8px 14px;border-radius:100px;pointer-events:none;}
+  .brandtag{position:fixed;left:22px;bottom:20px;z-index:20;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);background:rgba(35,33,32,.72);backdrop-filter:blur(8px);padding:8px 14px;border-radius:100px;pointer-events:none;}
+  .hint{position:fixed;left:50%;transform:translateX(-50%);bottom:20px;z-index:20;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45);transition:opacity .5s ease;pointer-events:none;}
+  @media (max-width:700px){.hint{display:none;}}
+
+  .rv{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;}
+  .rv.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){
+    *{transition-duration:.001ms!important;animation-duration:.001ms!important;}
+    .deck{scroll-behavior:auto;} .rv{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- 1 -->
+  <section class="slide dark">
+    <div class="wrap rv">
+      <div class="kicker">Fraternidade Barber Shop &amp; Pub × Tap</div>
+      <h1>Você já tem a melhor nota do bairro.<br>Falta o cliente conseguir chegar.</h1>
+      <p class="lead">Um plano de cinco passos para transformar a reputação que vocês já construíram em faturamento.</p>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="slide">
+    <div class="wrap rv">
+      <div class="kicker">Primeiro, uma história</div>
+      <h2>São 21h de uma quinta em Guarulhos.</h2>
+      <p class="lead">O Rafael passa a mão na barba, olha no espelho e decide: <b>amanhã eu corto</b>. Ele mora a oito minutos de vocês. Nunca ouviu falar da Fraternidade.</p>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="slide sand">
+    <div class="wrap rv">
+      <div class="kicker">Ele procura</div>
+      <h2>E vocês aparecem na frente.</h2>
+      <p class="lead">Ele digita “barbearia perto de mim”. A Fraternidade sobe na lista com <b>4,8 de 93 avaliações</b> — a melhor nota da tela. Esse é o ativo que vocês levaram anos construindo, e ele está funcionando.</p>
+      <div class="quote">Até aqui, vocês ganharam.</div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="slide dark">
+    <div class="wrap rv">
+      <div class="kicker">Aí ele clica</div>
+      <h2>E a porta está fechada.</h2>
+      <p class="lead">Sem site. Sem preço. Sem cardápio. Um Instagram e um telefone. São 21h — ninguém vai atender, e ninguém responde DM a essa hora.</p>
+      <p class="lead" style="margin-top:16px">O Rafael não vai esperar até amanhã para descobrir quanto custa um corte.</p>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="slide">
+    <div class="wrap rv">
+      <div class="kicker">O que acontece depois</div>
+      <h2>Ele volta para a lista e marca com o segundo colocado.</h2>
+      <p class="lead">Que tem <b>nota pior que a de vocês</b> — mas tem botão de agendar. Em quarenta segundos está resolvido.</p>
+      <p class="lead" style="margin-top:16px">O Rafael nunca soube que aqui tem chopp gelado e hambúrguer na chapa. Nunca soube que dá para ficar depois do corte. <b>Ele nunca soube que vocês existem de verdade.</b></p>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="slide dark">
+    <div class="wrap rv">
+      <div class="kicker">A conta que ninguém faz</div>
+      <h2>Quantos Rafaels por dia?</h2>
+      <p class="lead">Não é uma pergunta retórica — é a conta que define o tamanho do problema. Vamos preencher juntos na call:</p>
+      <div class="calc">
+        <div class="cell"><div class="lbl">Rafaels por dia</div><div class="val">?</div></div>
+        <div class="op">×</div>
+        <div class="cell"><div class="lbl">Ticket médio</div><div class="val">R$ ?</div></div>
+        <div class="op">×</div>
+        <div class="cell"><div class="lbl">Dias no mês</div><div class="val">26</div></div>
+        <div class="op">=</div>
+        <div class="cell" style="border-color:var(--accent)"><div class="lbl">Receita que passa reto</div><div class="val">R$ ?<small> /mês</small></div></div>
+      </div>
+      <p class="lead" style="margin-top:26px">Se o número for pequeno, a gente não faz nada. Se for grande, os próximos cinco slides resolvem.</p>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="slide sand">
+    <div class="wrap rv">
+      <div class="kicker">O plano</div>
+      <h2>Cinco passos para o Rafael chegar até a cadeira.</h2>
+      <p class="lead">Nenhum deles depende de vocês gastarem com anúncio. Todos usam o que a casa já tem: reputação, dois barbeiros bons e uma cozinha que ninguém conhece.</p>
+    </div>
+  </section>
+
+  <!-- 8 · passo 1 -->
+  <section class="slide">
+    <div class="wrap rv">
+      <div class="step-head"><div class="step-num">01</div><div><div class="kicker">A vitrine</div><h2 style="margin-top:8px">Fazer o Google trabalhar até o fim.</h2></div></div>
+      <p class="lead">Hoje o perfil traz o Rafael até a porta e para ali. Ele passa a ter destino: preço, cardápio, fotos do espaço, horário do pub separado do horário da barbearia — e um botão que resolve.</p>
+      <div class="cols">
+        <div class="box"><div class="t">O que muda</div><p>O perfil deixa de ser um cartão de visita e vira o primeiro passo de uma venda que termina em agendamento.</p></div>
+        <div class="box"><div class="t">Como se mede</div><p>Cliques em “Como chegar” e “Site” no painel do Google, mês a mês. O número está lá, hoje, e ninguém olha.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · passo 2 -->
+  <section class="slide dark">
+    <div class="wrap rv">
+      <div class="step-head"><div class="step-num">02</div><div><div class="kicker">A porta</div><h2 style="margin-top:8px">Uma agenda que não fecha às 22h.</h2></div></div>
+      <p class="lead">O cliente decide cortar quando ele quer, não quando vocês estão abertos. Agendamento online recebe o Rafael das 21h, das 2h da manhã, do domingo. Com lembrete automático antes do horário — <b>cadeira vazia por esquecimento é prejuízo puro</b>.</p>
+      <div class="cols">
+        <div class="box"><div class="t">O que muda</div><p>Vocês param de trocar dez mensagens para marcar um corte, e param de perder quem chegou fora do expediente.</p></div>
+        <div class="box"><div class="t">Como se mede</div><p>Quantos agendamentos entram fora do horário comercial, e quanto cai o índice de quem não aparece.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · passo 3 -->
+  <section class="slide">
+    <div class="wrap rv">
+      <div class="step-head"><div class="step-num">03</div><div><div class="kicker">O ticket</div><h2 style="margin-top:8px">O pub deixa de depender da cadeira.</h2></div></div>
+      <p class="lead">Hoje só descobre o pub quem já entrou para cortar. Ele é a segunda linha de receita da casa e vive escondido atrás da primeira. Cardápio visível, combo corte + chopp, e a oferta indo junto na confirmação do agendamento.</p>
+      <div class="cols">
+        <div class="box"><div class="t">O que muda</div><p>O mesmo cliente gasta mais na mesma visita. É a receita mais barata que existe: não custa nada para atrair.</p></div>
+        <div class="box"><div class="t">Como se mede</div><p>Ticket médio por cliente e a fatia dos que consomem no pub depois do corte.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · passo 4 -->
+  <section class="slide sand">
+    <div class="wrap rv">
+      <div class="step-head"><div class="step-num">04</div><div><div class="kicker">A recorrência</div><h2 style="margin-top:8px">Transformar corte avulso em mensalidade.</h2></div></div>
+      <p class="lead">Barbearia vive de retorno — o mesmo cliente, a cada quinze dias, o ano inteiro. Um clube mensal (dois cortes e uma barba, valor fechado) troca receita imprevisível por receita que entra todo dia 5.</p>
+      <div class="cols">
+        <div class="box"><div class="t">O que muda</div><p>Vocês passam a saber quanto vão faturar antes do mês começar, e o cliente deixa de comparar preço a cada corte.</p></div>
+        <div class="box"><div class="t">Como se mede</div><p>Número de assinantes ativos e a frequência média de retorno de quem assina contra quem não assina.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 · passo 5 -->
+  <section class="slide dark">
+    <div class="wrap rv">
+      <div class="step-head"><div class="step-num">05</div><div><div class="kicker">O motor</div><h2 style="margin-top:8px">Avaliação vira combustível, não sorte.</h2></div></div>
+      <p class="lead">As 93 avaliações vieram de quem lembrou de avaliar sozinho. Pedir no automático, com link direto, logo depois do atendimento, multiplica isso — e <b>quanto mais avaliação, mais alto vocês aparecem para o próximo Rafael</b>. O passo 5 alimenta o passo 1.</p>
+      <div class="cols">
+        <div class="box"><div class="t">O que muda</div><p>O crescimento deixa de depender de sorte e vira um ciclo: mais avaliação, mais posição, mais cliente novo.</p></div>
+        <div class="box"><div class="t">Como se mede</div><p>Avaliações novas por mês e a posição da casa na busca por “barbearia” na região.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 -->
+  <section class="slide">
+    <div class="wrap rv">
+      <div class="kicker">A mesma quinta-feira, 21h</div>
+      <h2>Só que agora o Rafael termina a noite marcado.</h2>
+      <p class="lead">Ele digita “barbearia perto de mim”. Vocês aparecem com 4,8. Ele clica, vê o preço do combo, escolhe o Vini, pega sábado às 15h e recebe a confirmação no WhatsApp — <b>tudo isso enquanto vocês estão fechados</b>.</p>
+      <p class="lead" style="margin-top:16px">No sábado ele corta, e como já viu o cardápio antes de chegar, fica para o chopp. Duas semanas depois, vira assinante. E deixa a 94ª avaliação.</p>
+      <div class="quote">Mesma casa. Mesmos barbeiros. Mesma nota.<br>Outro faturamento.</div>
+    </div>
+  </section>
+
+  <!-- 14 -->
+  <section class="slide sand">
+    <div class="wrap rv">
+      <div class="kicker">Como começa</div>
+      <h2>Rápido, e na ordem que dá dinheiro primeiro.</h2>
+      <div class="phases">
+        <div class="phase"><div class="w">Semana 1</div><div class="h">Site no ar</div><p>Passos 1 e 2. Vitrine completa e agenda funcionando. É o que para o vazamento imediatamente.</p></div>
+        <div class="phase"><div class="w">Semana 2</div><div class="h">Pub e ticket</div><p>Passo 3. Cardápio publicado, combo montado e oferta entrando na confirmação.</p></div>
+        <div class="phase"><div class="w">Mês 2</div><div class="h">Recorrência</div><p>Passos 4 e 5. Clube mensal e o pedido automático de avaliação rodando.</p></div>
+      </div>
+      <p class="lead" style="margin-top:30px">A prévia do site já está pronta, com os dados públicos de vocês. Dá para ver funcionando agora.</p>
+    </div>
+  </section>
+
+  <!-- 15 -->
+  <section class="slide dark">
+    <div class="wrap rv">
+      <div class="kicker">Tap · desenvolvimento de software</div>
+      <h1 style="font-size:clamp(2rem,5.4vw,3.4rem)">Vamos preencher aquela conta juntos?</h1>
+      <p class="lead">Se o número não justificar, a gente para por aqui. Se justificar, começamos pela semana 1.</p>
+      <div class="cta">
+        <a class="btn btn-a" href="../barbearia/" target="_blank" rel="noopener">Ver a prévia do site</a>
+        <a class="btn btn-b" href="https://wa.me/5511970336126" target="_blank" rel="noopener">Falar com a Tap</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="brandtag">Tap</div>
+<div class="counter" id="counter">01 / 15</div>
+<div class="hint" id="hint">Role para avançar</div>
+
+<script>
+  var deck = document.getElementById('deck');
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var counter = document.getElementById('counter');
+  var hint = document.getElementById('hint');
+
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.rv').forEach(function(el){ el.classList.add('in'); });
+        var i = slides.indexOf(e.target);
+        if(i >= 0){
+          counter.textContent = pad(i+1) + ' / ' + pad(slides.length);
+          if(i > 0) hint.style.opacity = '0';
+        }
+      }
+    });
+  }, { threshold: 0.55 });
+  slides.forEach(function(s){ io.observe(s); });
+
+  document.addEventListener('keydown', function(e){
+    var idx = 0, best = Infinity;
+    slides.forEach(function(s, i){
+      var d = Math.abs(s.getBoundingClientRect().top);
+      if(d < best){ best = d; idx = i; }
+    });
+    if(e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' '){
+      e.preventDefault();
+      if(slides[idx+1]) slides[idx+1].scrollIntoView();
+    } else if(e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp'){
+      e.preventDefault();
+      if(slides[idx-1]) slides[idx-1].scrollIntoView();
+    }
+  });
+</script>
+
+</body>
+</html>
